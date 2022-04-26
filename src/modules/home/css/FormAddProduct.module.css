@@ -1,0 +1,20 @@
+.height{
+    background-color: #323259;
+    height: 2.4rem;
+}
+
+.wrapInfo{
+    padding: 3rem;
+}
+
+.wrapPriceInventory{
+    padding: 1.2rem 3rem;
+}
+
+.wrapMarketing{
+    padding: 1.2rem 3rem;
+}
+
+.shipping{
+    padding: 1.2rem 3rem;
+}

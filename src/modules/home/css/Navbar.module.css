@@ -1,0 +1,90 @@
+.navbar{
+    position: fixed;
+    background-color: #323259;
+    height: 70px;
+    width: 100%;
+    box-shadow: 0 0 8px 8px rgba(0,0,0,0.15);
+    z-index: 999;
+}
+
+.navbarContanier{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    width: 100%;
+}
+
+.wrap{
+    display: flex;
+}
+
+.btnIconBar{
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.btnIconBar:hover{
+    opacity: 1;
+}
+
+.navbarTitle{
+    margin-left: 1.2rem;
+    position: relative;
+}
+
+.title{
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: #fff;
+}
+
+.titleLink{
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+}
+
+.titleLink:hover{
+    color: #fff;
+}
+
+.iconBell{
+    font-size: 1rem;
+    position: absolute;
+    top: 10px;
+    right: -18px;
+}   
+
+.navbarIconUser{
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.6;
+}
+
+.navbarIconUser:hover{
+    opacity: 1;
+}
+
+.accountMenu{
+    background-color: #fff;
+    width: 300px;
+    position: absolute;
+    top: 50px;
+    right: 30px;
+}
+
+.accountList{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding: 0.4rem;
+}
+
+.accountLogout:hover{
+    color: #007bff;
+    cursor: pointer;
+}

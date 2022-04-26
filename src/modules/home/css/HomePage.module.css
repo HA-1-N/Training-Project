@@ -1,0 +1,12 @@
+.main{
+    height: 100%;
+}
+
+.container{
+    background-color: #1b1b38;
+    min-height: 100vh;
+}
+
+.navbar{
+    height: 70px;
+}
