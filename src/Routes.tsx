@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { ROUTES } from './configs/routes';
@@ -5,18 +6,23 @@ import ProtectedRoute from './modules/common/components/ProtectedRoute';
 import DetailPageProduct from './modules/home/DetailPageProduct/DetailPageProduct';
 import DetailPageUser from './modules/home/DetailPageUser/DetailPageUser';
 import UserPageAdd from './modules/home/UserPageComponent/component/UserPageAdd/UserPageAdd';
+import { ACCESS_TOKEN_KEY } from './utils/constants';
 
 const HomePage = lazy(() => import('./modules/home/pages/HomePage'));
 const ContactPage = lazy(() => import('./modules/home/pages/ContactPage'));
 const LoginPage = lazy(() => import('./modules/auth/pages/LoginPage'));
 const ProductPage = lazy(() => import('./modules/home/ProductPageComponent/ProductPage'));
 const UserPage = lazy(() => import('./modules/home/UserPageComponent/UserPage'));
-const ProductPageAdd = lazy(() => import('./modules/home/ProductPageComponent/component/ProductPageAdd/ProductPageAdd'));
+const ProductPageAdd = lazy(
+  () => import('./modules/home/ProductPageComponent/component/ProductPageAdd/ProductPageAdd'),
+);
 
-interface Props { }
+interface Props {}
 
 export const Routes = (props: Props) => {
   const location = useLocation();
+
+  const accessToken = Cookies.get(ACCESS_TOKEN_KEY);
 
   return (
     <Suspense fallback={<div>Loading.....</div>}>

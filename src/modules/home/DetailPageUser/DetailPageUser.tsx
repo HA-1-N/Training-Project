@@ -9,62 +9,56 @@ import Cookies from 'js-cookie';
 import { ACCESS_TOKEN_KEY } from '../../../utils/constants';
 
 type Params = {
-    id?: string,
-    userId?: string,
-}
+  id?: string;
+  userId?: string;
+};
 
 const DetailPageUser = () => {
+  const { id } = useParams<Params>();
 
-    const { id } = useParams<Params>();
+  const [profile, setProfile] = useState<any>();
 
-    console.log('id: ', id);
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const [profile, setProfile] = useState<any>();
+  useEffect(() => {
+    // call api get user by id
+    const fetchUserById = async () => {
+      setLoading(true);
+      const res = await fetch('https://api.gearfocus.div4.pgtest.co/apiVendor/profile/detail', {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify({ id }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: Cookies.get(ACCESS_TOKEN_KEY) || '',
+        },
+        cache: 'no-store',
+      });
 
-    const [loading, setLoading] = useState<boolean>(false);
+      const json = await res.json();
+      console.log(json);
 
+      if (json?.data?.info) {
+        setLoading(false);
+        setProfile(json?.data?.info);
+      }
+    };
+    fetchUserById();
+  }, [id]);
 
-    useEffect(() => {
-        // call api get user by id
-        const fetchUserById = async () => {
-            setLoading(true);
-            const res = await fetch('https://api.gearfocus.div4.pgtest.co/apiVendor/profile/detail', {
-                credentials: 'include',
-                method: 'POST',
-                body: JSON.stringify({ id }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: Cookies.get(ACCESS_TOKEN_KEY) || '',
-                },
-                cache: 'no-store',
-            });
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-            const json = await res.json();
-            console.log(json);
-
-            if (json?.data?.info) {
-                setLoading(false);
-                setProfile(json?.data?.info);
-            }
-        }
-        fetchUserById();
-    }, [id]);
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
-    return (
-        <>
-            <div className={clsx(styles.detailPage)}>
-                <div className={clsx(styles.detailPageComponent)}>
-                    {
-                        profile ? <DetailPageComponent profile={profile} setProfile={setProfile} /> : null
-                    }
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className={clsx(styles.detailPage)}>
+        <div className={clsx(styles.detailPageComponent)}>
+          {profile ? <DetailPageComponent profile={profile} setProfile={setProfile} /> : null}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default DetailPageUser;
